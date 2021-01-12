@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static '/bootstrap.css' %}" >
+    <link rel="stylesheet" href="{% static '/fontawesome.css' %}" >
+    <link rel="stylesheet" href="{% static '/style.css' %}" >
+</head>
+<body>
+{% include 'cricket/nav.html' %}
+<div class="container-fluid" id="wrapper">
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4" id="content">
+            <h2>PLAYER LIST</h2>
+            <ul class="list-group t20">
+                {% for member in member_list %}
+                    <a href="{% url 'viewmember' member.id %}">
+                        <li class="list-group-item">
+                            <p>{{ member.name }}</p>
+                            {% for team in member.role.all %}
+                                 <p>{{ team.name }}</p>
+                            {% endfor %}
+                            {% for team in member.teamsPlayedFor.all %}
+                                <p>{{ team.name }}</p>
+                            {% endfor %}
+                        </li>
+                    </a>
+                    </ul>
+
+                    <a href="{% url 'memberform' member.id %}">
+                    <span class="btn btn-primary">
+                        Update
+                    </span>
+                    </a>
+                    <a href="{% url 'deletemember' member.id %}">
+                    <span class="btn btn-primary">
+                        Delete
+                    </span>
+                    </a>
+                    <br><hr>
+
+                {%  endfor %}
+
+
+            <a href="{% url 'viewmemberteam' 'firstXi' %}">
+               <button class="btn btn-primary">
+                   FirstXi
+               </button>
+            </a>
+            <a href="{% url 'viewmemberteam' 'secondXi' %}">
+               <button class="btn btn-primary">
+                   SecondXi
+               </button>
+            </a>
+        <br><br>
+            <a href="{% url 'viewmemberrole' 'Player' %}">
+               <button class="btn btn-primary">
+                   Player
+               </button>
+            </a>
+            <a href="{% url 'viewmemberrole' 'Captain' %}">
+               <button class="btn btn-primary">
+                   Captain
+               </button>
+            </a>
+            <a href="{% url 'viewmemberrole' 'Coach' %}">
+               <button class="btn btn-primary">
+                   Coach
+               </button>
+            </a>
+        <br><br>
+            <a href="{% url 'create' %}">
+               <button class="btn btn-primary">
+                   Add New Member
+               </button>
+            </a>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

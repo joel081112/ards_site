@@ -1,0 +1,125 @@
+
+TO TEST
+py manage.py shell
+from ards_site.models import Team, Awards, Wicket, Role, Opponent, Batting, Bowling, Member, Type, Cup
+
+
+
+
+
+JoelFerguson = Member.objects.get(pk=12)
+GarethRogers = Member.objects.get(pk=15)
+RobbieIngham = Member.objects.get(pk=15)
+
+
+
+>>> JoelFerguson
+<Team: Joel Ferguson>
+>>> batting
+<Awards: Batting>
+>>> bowling
+<Awards: Bowling>
+>>> bowling2
+<Awards: Bowling>
+>>> bowling2.type
+'Bowling'
+>>> bowling2.year
+2015
+
+JoelFerguson.awards_set.all()
+<QuerySet [<Awards: Batting>, <Awards: Bowling>]>
+RobbieIngham.awards_set.all()
+<QuerySet []>
+
+
+
+JoelFerguson.batting_set.all()
+<QuerySet [<Batting: Monkstown>, <Batting: Bangor>]>
+
+
+“team”: “firstXi / secondXi / u13 / u15”
+
+firstXi = Team(name='firstXi')
+secondXi = Team(name='secondXi')
+u13 = Team(name='u13')
+u15 = Team(name='u15')
+firstXi.save()
+secondXi.save()
+u13.save()
+u15.save()
+
+
+roles = "Captain","Player","Board officer","Coach"
+
+Captain = Role(name='Captain')
+Player = Role(name='Player')
+Boardofficer = Role(name='Board officer')
+Coach = Role(name='Coach')
+Captain.save()
+Player.save()
+Boardofficer.save()
+Coach.save()
+
+types = "Bowler","Batter","Wicket Keeper"
+
+Bowler = Type(name='Bowler')
+Batter = Type(name='Batter')
+WicketKeeper = Type(name='Wicket Keeper')
+Bowler.save()
+Batter.save()
+WicketKeeper.save()
+
+
+opponents ="Monkstown","Bangor","Donaghadee","Donaghacloney"
+
+Monkstown = Opponent(name='Monkstown')
+Bangor = Opponent(name='Bangor')
+Donaghadee = Opponent(name='Donaghadee')
+Donaghacloney = Opponent(name='Donaghacloney')
+Monkstown.save()
+Bangor.save()
+Donaghadee.save()
+Donaghacloney.save()
+
+wickets ="Bowled","Caught","LBW","Stumped","Hit Wicket","Run out"
+
+Bowled = Wicket(name='Bowled')
+Caught = Wicket(name='Caught')
+LBW = Wicket(name='LBW')
+Stumped = Wicket(name='Stumped')
+HitWicket = Wicket(name='Hit Wicket')
+Runout = Wicket(name='Run out')
+Bowled.save()
+Caught.save()
+LBW.save()
+Stumped.save()
+HitWicket.save()
+Runout.save()
+
+
+JoelFerguson = Member(name='Joel Ferguson', dateOfBirth='1996-08-16', type=Batter, dateJoined='2007-05-05', mobile='07895436125')
+GarethRogers = Member(name='Gareth Rogers', dateOfBirth='1986-02-16', type=Bowler, dateJoined='1999-6-05', mobile='07845612321')
+RobbieIngham = Member(name='Robbie Ingham')
+JoelFerguson.save()
+GarethRogers.save()
+RobbieIngham.save()
+
+monkstown= Batting(member=JoelFerguson, team=secondXi, opponent=Monkstown, date='2020-05-05',fours=4, sixes=0,runs=31, out=Bowled, )
+bangor= Batting(member=JoelFerguson, team=secondXi, opponent=Bangor, date='2020-05-12',fours=1, sixes=1,runs=15, out=Ronout )
+monkstown.save()
+bangor.save()
+
+
+
+batting = Cup(name='Batting')
+bowling = Cup(name='Bowling')
+batting.save()
+bowling.save()
+
+
+batting2 = Awards(type=batting2nd, year=2015, team=JoelFerguson)
+bowling2 = Awards(type=bowling2nd, year=2016, team=JoelFerguson)
+bowling1 = Awards(type=bowling1st, year=2015, team=GarethRogers)
+batting2.save()
+bowling2.save()
+bowling1.save()
